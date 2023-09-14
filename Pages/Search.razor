@@ -8,7 +8,7 @@
         <RadzenText Text="Search" TextStyle="TextStyle.H3" TagName="TagName.H1" />
     </RadzenColumn>
 </RadzenRow>
-<RadzenTextBox Placeholder="Search..." @bind-Value=searchText Style="width: 967px"></RadzenTextBox>
+<RadzenTextBox Placeholder="Search..." @bind-Value=searchText Style="width: 80%"></RadzenTextBox>
 <RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" />
 <RadzenButton Style="width: 162px; height: 38px" Text="Search" Click="@SearchButton"></RadzenButton>
 

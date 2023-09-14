@@ -90,7 +90,9 @@ namespace Chaos.Pages
 
             if (updateTextArea)
             {
-                searchText += speechValue;
+                searchText += new string((from c in speechValue
+                                          where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
+                                          select c).ToArray());
             }
         }
 
