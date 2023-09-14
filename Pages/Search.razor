@@ -8,17 +8,20 @@
         <RadzenText Text="Search" TextStyle="TextStyle.H3" TagName="TagName.H1" />
     </RadzenColumn>
 </RadzenRow>
-<RadzenTextBox @bind-Value=searchText Style="width: 967px"></RadzenTextBox>
+<RadzenTextBox Placeholder="Search..." @bind-Value=searchText Style="width: 967px"></RadzenTextBox>
+<RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" />
 <RadzenButton Style="width: 162px; height: 38px" Text="Search" Click="@SearchButton"></RadzenButton>
+
 
 <RadzenCheckBoxList @bind-Value=@Values TValue="int" Change=@(args => Values = args)>
     <Items>
-        <RadzenCheckBoxListItem Value="1" Text="DFM"></RadzenCheckBoxListItem>
+        <RadzenCheckBoxListItem Disabled=true Value="1" Text="DFM (TBD)"></RadzenCheckBoxListItem>
         <RadzenCheckBoxListItem Value="2" Text="ICM"></RadzenCheckBoxListItem>
         <RadzenCheckBoxListItem Value="3" Text="Azure DevOps Work Items"></RadzenCheckBoxListItem>
         <RadzenCheckBoxListItem Value="4" Text="Azure DevOps Wiki"></RadzenCheckBoxListItem>
-        <RadzenCheckBoxListItem Value="5" Text="AVA?"></RadzenCheckBoxListItem>
-        <RadzenCheckBoxListItem Value="6" Text="OUTLOOK?"></RadzenCheckBoxListItem>
+        <RadzenCheckBoxListItem Value="5" Text="Azure DevOps Code"></RadzenCheckBoxListItem>
+        <RadzenCheckBoxListItem Disabled=true Value="6" Text="AVA (TBD)"></RadzenCheckBoxListItem>
+        <RadzenCheckBoxListItem Disabled=true Value="7" Text="OUTLOOK (TBD)"></RadzenCheckBoxListItem>
     </Items>
 </RadzenCheckBoxList>
 

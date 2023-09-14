@@ -49,14 +49,7 @@ namespace Chaos.Pages
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
-            //await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=aapp%20service%20authentication", "_blank");
-            //
-            //HttpClient client = new HttpClient();
-            //
-            //using HttpResponseMessage response = await client.GetAsync("https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=aapp%20service%20authentication");
-            //
-            //var jsonResponse = await response.Content.ReadAsStringAsync();
-            //Console.Write(jsonResponse);
+            
         }
         
     }
