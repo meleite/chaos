@@ -1,7 +1,3 @@
-
-using System;
-using System.Collections.Generic;
-
 namespace Chaos.Models
 {
     public class ApplicationClaim

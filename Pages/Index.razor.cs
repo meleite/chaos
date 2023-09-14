@@ -1,18 +1,7 @@
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Authorization;
+using Chaos.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 using Radzen;
-using Radzen.Blazor;
-using Chaos.Services.Interfaces;
-using Chaos.Services;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Chaos.Pages
 {
@@ -41,7 +30,7 @@ namespace Chaos.Pages
 
         [Inject]
         protected Api Api { get; set; }
-        
+
         protected async override Task OnInitializedAsync()
         {
             //OnInitialize          
@@ -50,8 +39,8 @@ namespace Chaos.Pages
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
-            
+
         }
-        
+
     }
 }

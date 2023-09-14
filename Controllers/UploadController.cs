@@ -1,8 +1,4 @@
-using System;
-using System.IO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Chaos.Controllers
 {

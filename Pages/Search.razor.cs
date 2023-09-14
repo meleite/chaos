@@ -1,21 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Radzen;
-using Radzen.Blazor;
-using System.Web;
-using Chaos.Shared;
-using Chaos.Components;
-using Microsoft.Extensions.Configuration;
 using Azure.Storage.Blobs;
+using Chaos.Components;
 using Chaos.Models;
-using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Newtonsoft.Json;
+using Radzen;
 using System.Text;
+using System.Web;
 
 
 namespace Chaos.Pages
@@ -44,14 +35,10 @@ namespace Chaos.Pages
         protected SecurityService Security { get; set; }
 
         //CheckBox
-        IEnumerable<int> Values = new int[] { 1, 2, 3, 4, 5, 6 ,7};
+        IEnumerable<int> Values = new int[] { 1, 2, 3, 4, 5, 6, 7 };
 
         //Search
         public string searchText { get; set; }
-
-        //SpeachtoText
-        string valueSpeech;
-        //EventConsole console;
 
         public DateOnly date;
 
@@ -60,8 +47,6 @@ namespace Chaos.Pages
         private BlobClient blobClient;
 
         public List<SearchItem> items = new();
-
-        IEnumerable<SearchItem> itemsX;
 
         [Inject]
         private IConfiguration configuration { get; set; }//then you can get your connectionStringvar connection=  configuration["connectionString"];
@@ -84,7 +69,6 @@ namespace Chaos.Pages
                 {
                     string json = r.ReadToEnd();
                     items = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SearchItem>>(json);
-                    itemsX = items.AsQueryable();  
                 }
             }
         }
@@ -97,7 +81,7 @@ namespace Chaos.Pages
             }
             else
             {
-                
+
                 if (Values.Contains(1))//ICM
                 {
                     await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText), "_blank");
@@ -112,7 +96,7 @@ namespace Chaos.Pages
                 }
                 if (Values.Contains(4))//DevOps Code
                 {
-                    await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?&text=" + HttpUtility.UrlEncode(searchText) + "&type=code&lp=custom-Collection&filters=&pageSize=25", "_blank");                
+                    await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?&text=" + HttpUtility.UrlEncode(searchText) + "&type=code&lp=custom-Collection&filters=&pageSize=25", "_blank");
                 }
                 if (Values.Contains(5))//DFM
                 {
@@ -130,7 +114,7 @@ namespace Chaos.Pages
 
             }
 
-            items.Add(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow)});
+            items.Add(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow) });
             var itemsJson = JsonConvert.SerializeObject(items);
 
             try
@@ -146,7 +130,7 @@ namespace Chaos.Pages
             }
         }
 
-        
+
 
         void OnSpeechCaptured(string speechValue, bool updateTextArea, string name)
         {
@@ -155,8 +139,8 @@ namespace Chaos.Pages
             if (updateTextArea)
             {
                 searchText = new string((from c in speechValue
-                                          where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
-                                          select c).ToArray());
+                                         where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
+                                         select c).ToArray());
             }
         }
 

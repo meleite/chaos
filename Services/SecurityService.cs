@@ -1,18 +1,8 @@
-using System;
-using System.Web;
-using System.Linq;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Text;
-using System.Text.Json;
-using System.Security.Claims;
+using Chaos.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-
 using Radzen;
-
-using Chaos.Models;
+using System.Security.Claims;
 
 namespace Chaos
 {
@@ -34,7 +24,7 @@ namespace Chaos
 
         public async Task<ApplicationAuthenticationState> GetAuthenticationStateAsync()
         {
-            var uri =  new Uri($"{navigationManager.BaseUri}Account/CurrentUser");
+            var uri = new Uri($"{navigationManager.BaseUri}Account/CurrentUser");
 
             var response = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, uri));
 
@@ -75,7 +65,7 @@ namespace Chaos
 
             if (name != null)
             {
-                User = new ApplicationUser { Name = name , Email = email };
+                User = new ApplicationUser { Name = name, Email = email };
             }
 
             return IsAuthenticated();
