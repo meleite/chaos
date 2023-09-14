@@ -29,6 +29,7 @@
     </Items>
 </RadzenCheckBoxList>
 
+<RadzenCard>
 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem" Class="rz-p-2">
     <RadzenCheckBox @bind-Value="@allowVirtualization" Name="allowVirtualization" />
     <RadzenLabel Text="Allow virtualization" Component="allowVirtualization" />
@@ -53,18 +54,19 @@
             </RadzenCard>
         </Template>
     </RadzenDataList>
+</RadzenCard>
 
-    <style>
-        .product-title {
-            min-height: 72px;
-            background-color: var(--rz-secondary-lighter);
-        }
+<style>
+    .product-title {
+        min-height: 72px;
+        background-color: var(--rz-secondary-lighter);
+    }
 
-        .price-badge {
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 20px;
-            padding: 8px;
-        }
-    </style>
+    .price-badge {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        padding: 8px;
+    }
+</style>
 
