@@ -9,8 +9,8 @@
     </RadzenColumn>
 </RadzenRow>
 <RadzenTextBox Placeholder="Search..." @bind-Value=searchText Style="width: 80%"></RadzenTextBox>
-<RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" />
-<RadzenButton Style="width: 162px; height: 38px" Text="Search" Click="@SearchButton"></RadzenButton>
+<RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" Style="height: 40px; background-color: #4340D2; color: #ffffff" />
+<RadzenButton Style="width: 100px; height: 40px" Text="Search" Click="@SearchButton"></RadzenButton>
 
 
 <RadzenCheckBoxList @bind-Value=@Values TValue="int" Change=@(args => Values = args)>
