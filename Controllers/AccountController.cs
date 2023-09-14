@@ -36,5 +36,16 @@ namespace Chaos.Controllers
                 Claims = User.Claims.Select(c => new ApplicationClaim { Type = c.Type, Value = c.Value })
             };
         }
+
+        [HttpGet]
+        public ApplicationAuthenticationState CurrentUserDetails()
+        {
+            return new ApplicationAuthenticationState
+            {
+                IsAuthenticated = User.Identity.IsAuthenticated,
+                Name = User.Identity.Name,
+                Claims = User.Claims.Select(c => new ApplicationClaim { Type = c.Type, Value = c.Value })
+            };
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -9,6 +10,9 @@ using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 using Radzen;
 using Radzen.Blazor;
+using Chaos.Services.Interfaces;
+using Chaos.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Chaos.Pages
 {
@@ -34,5 +38,26 @@ namespace Chaos.Pages
 
         [Inject]
         protected SecurityService Security { get; set; }
+
+        [Inject]
+        protected Api Api { get; set; }
+        
+        protected async override Task OnInitializedAsync()
+        {
+            //OnInitialize          
+        }
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            //await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=aapp%20service%20authentication", "_blank");
+            //
+            //HttpClient client = new HttpClient();
+            //
+            //using HttpResponseMessage response = await client.GetAsync("https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=aapp%20service%20authentication");
+            //
+            //var jsonResponse = await response.Content.ReadAsStringAsync();
+            //Console.Write(jsonResponse);
+        }
+        
     }
 }
