@@ -71,10 +71,11 @@ namespace Chaos
             Principal = result.User;
 
             var name = Principal.FindFirstValue(ClaimTypes.Name) ?? Principal.FindFirstValue("name");
+            var email = Principal.FindFirstValue(ClaimTypes.Name) ?? Principal.FindFirstValue("preferred_username");
 
             if (name != null)
             {
-                User = new ApplicationUser { Name = name };
+                User = new ApplicationUser { Name = name , Email = email };
             }
 
             return IsAuthenticated();
