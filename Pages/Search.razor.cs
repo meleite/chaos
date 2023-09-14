@@ -10,6 +10,13 @@ using Radzen.Blazor;
 using System.Web;
 using Chaos.Shared;
 using Chaos.Components;
+using Microsoft.Extensions.Configuration;
+using Azure.Storage.Blobs;
+using Chaos.Models;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using System.Text;
+
 
 namespace Chaos.Pages
 {
@@ -45,6 +52,42 @@ namespace Chaos.Pages
         //SpeachtoText
         string valueSpeech;
         //EventConsole console;
+
+        public DateOnly date;
+
+        public string test;
+
+        private BlobClient blobClient;
+
+        public List<SearchItem> items = new();
+
+        IEnumerable<SearchItem> itemsX;
+
+        [Inject]
+        private IConfiguration configuration { get; set; }//then you can get your connectionStringvar connection=  configuration["connectionString"];
+
+        bool allowVirtualization;
+
+        protected async override Task OnInitializedAsync()
+        {
+            //OnInitialize          
+            Console.WriteLine(Security.User.Email);
+
+            BlobServiceClient blobServiceClient = new BlobServiceClient(configuration["SASKey"]);
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(configuration["BlobName"]);
+            blobClient = containerClient.GetBlobClient(Security.User.Email.Replace("@", "_") + ".json");
+
+            if (blobClient.Exists())
+            {
+                var response = blobClient.Download();
+                using (StreamReader r = new StreamReader(response.Value.Content))
+                {
+                    string json = r.ReadToEnd();
+                    items = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SearchItem>>(json);
+                    itemsX = items.AsQueryable();  
+                }
+            }
+        }
 
         private async Task SearchButton()
         {
@@ -86,7 +129,24 @@ namespace Chaos.Pages
 
 
             }
+
+            items.Add(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow)});
+            var itemsJson = JsonConvert.SerializeObject(items);
+
+            try
+            {
+                using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(itemsJson)))
+                {
+                    blobClient.Upload(ms, overwrite: true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception details: " + ex.ToString());
+            }
         }
+
+        
 
         void OnSpeechCaptured(string speechValue, bool updateTextArea, string name)
         {
@@ -109,11 +169,12 @@ namespace Chaos.Pages
         {
             DialogService.Open<PopUpWarning>("PopUp Requirements", null, new DialogOptions() { Width = "1000px", Height = "600px", Resizable = true, Draggable = true });
         }
+
+        void stg()
+        {
+
+            //blobClient = containerClient.GetBlobClient(Security.User.Email.Replace("@", "_") + ".json");
+            //if (blobClient.Exists())
+        }
     }
 }
-
-//BlobServiceClient blobServiceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=ticketmtool;AccountKey=3fk/ac57fiU9Kf8DopFzM4MGLZpSTpum1ArNcoZz6VreQZOoF6TjmZ+Zh+EkZvGb/F+r8lbN1cuP+AStMHRV4A==;EndpointSuffix=core.windows.net");
-//BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("ticketmanagementtool");
-
-//blobClient = containerClient.GetBlobClient(Security.User.Email.Replace("@", "_") + ".json");
-//if (blobClient.Exists())
