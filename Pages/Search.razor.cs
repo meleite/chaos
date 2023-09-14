@@ -9,6 +9,7 @@ using Radzen;
 using Radzen.Blazor;
 using System.Web;
 using Chaos.Shared;
+using Chaos.Components;
 
 namespace Chaos.Pages
 {
@@ -93,7 +94,7 @@ namespace Chaos.Pages
 
             if (updateTextArea)
             {
-                searchText += new string((from c in speechValue
+                searchText = new string((from c in speechValue
                                           where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
                                           select c).ToArray());
             }
@@ -102,6 +103,11 @@ namespace Chaos.Pages
         void OnTextAreaChange(string value, string name)
         {
             //console.Log($"{name} value changed to {value}");
+        }
+
+        private void PopupWarning()
+        {
+            DialogService.Open<PopUpWarning>("PopUp Requirements", null, new DialogOptions() { Width = "1000px", Height = "600px", Resizable = true, Draggable = true });
         }
     }
 }

@@ -12,7 +12,4 @@
     <PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" Version="7.0.0" />
     <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
 </Project>

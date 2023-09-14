@@ -3,6 +3,9 @@
 @attribute [Authorize]
 
 <PageTitle>Search</PageTitle>
+<RadzenAlert AllowClose="false" AlertStyle="AlertStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter">
+    Requires PopUp permissions. For more details <a href="" @onclick="@PopupWarning" @onclick:preventDefault >Click here!</a>
+</RadzenAlert>
 <RadzenRow>
     <RadzenColumn Size="12">
         <RadzenText Text="Search" TextStyle="TextStyle.H3" TagName="TagName.H1" />
