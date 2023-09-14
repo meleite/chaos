@@ -49,7 +49,7 @@ namespace Chaos.Pages
 
         private BlobClient blobClient;
 
-        public List<SearchItem> items = new();
+        public LinkedList<SearchItem> items = new();
        
         bool allowVirtualization = true;
 
@@ -68,7 +68,7 @@ namespace Chaos.Pages
                 using (StreamReader r = new StreamReader(response.Value.Content))
                 {
                     string json = r.ReadToEnd();
-                    items = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SearchItem>>(json);
+                    items = Newtonsoft.Json.JsonConvert.DeserializeObject<LinkedList<SearchItem>>(json);
                 }
             }
         }
@@ -112,7 +112,7 @@ namespace Chaos.Pages
                 }
             }
 
-            items.Add(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow) });
+            items.AddFirst(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow) });
             var itemsJson = JsonConvert.SerializeObject(items);
 
             try
