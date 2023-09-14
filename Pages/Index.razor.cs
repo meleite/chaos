@@ -45,6 +45,7 @@ namespace Chaos.Pages
         protected async override Task OnInitializedAsync()
         {
             //OnInitialize          
+            Console.WriteLine(Security.User.Email);
         }
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
