@@ -53,25 +53,26 @@ namespace Chaos.Pages
             }
             else
             {
-                if (Values.Contains(1))//DFM
-                {
-
-                }
-                if (Values.Contains(2))//ICM
+                
+                if (Values.Contains(1))//ICM
                 {
                     await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText), "_blank");
                 }
-                if (Values.Contains(3))//DevOps Work Items
+                if (Values.Contains(2))//DevOps Work Items
                 {
                     await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=workitem&lp=custom-Collection&filters=&pageSize=25", "_blank");
                 }
-                if (Values.Contains(4))//DevOps Wiki
+                if (Values.Contains(3))//DevOps Wiki
                 {
                     await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=wiki&lp=custom-Collection&filters=&pageSize=25", "_blank");
                 }
-                if (Values.Contains(5))//DevOps Code
+                if (Values.Contains(4))//DevOps Code
                 {
                     await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?&text=" + HttpUtility.UrlEncode(searchText) + "&type=code&lp=custom-Collection&filters=&pageSize=25", "_blank");                
+                }
+                if (Values.Contains(5))//DFM
+                {
+
                 }
                 if (Values.Contains(6))//AVA
                 {
