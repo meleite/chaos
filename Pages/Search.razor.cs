@@ -34,6 +34,9 @@ namespace Chaos.Pages
         [Inject]
         protected SecurityService Security { get; set; }
 
+        [Inject]
+        private IConfiguration configuration { get; set; }//then you can get your connectionStringvar connection=  configuration["connectionString"];
+
         //CheckBox
         IEnumerable<int> Values = new int[] { 1, 2, 3, 4, 5, 6, 7 };
 
@@ -47,11 +50,8 @@ namespace Chaos.Pages
         private BlobClient blobClient;
 
         public List<SearchItem> items = new();
-
-        [Inject]
-        private IConfiguration configuration { get; set; }//then you can get your connectionStringvar connection=  configuration["connectionString"];
-
-        bool allowVirtualization;
+       
+        bool allowVirtualization = true;
 
         protected async override Task OnInitializedAsync()
         {
@@ -110,8 +110,6 @@ namespace Chaos.Pages
                 {
 
                 }
-
-
             }
 
             items.Add(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow) });
@@ -130,8 +128,6 @@ namespace Chaos.Pages
             }
         }
 
-
-
         void OnSpeechCaptured(string speechValue, bool updateTextArea, string name)
         {
             ///console.Log($"Speech Captured from {name}: {speechValue}");
@@ -144,21 +140,9 @@ namespace Chaos.Pages
             }
         }
 
-        void OnTextAreaChange(string value, string name)
-        {
-            //console.Log($"{name} value changed to {value}");
-        }
-
         private void PopupWarning()
         {
             DialogService.Open<PopUpWarning>("PopUp Requirements", null, new DialogOptions() { Width = "1000px", Height = "600px", Resizable = true, Draggable = true });
-        }
-
-        void stg()
-        {
-
-            //blobClient = containerClient.GetBlobClient(Security.User.Email.Replace("@", "_") + ".json");
-            //if (blobClient.Exists())
         }
     }
 }
