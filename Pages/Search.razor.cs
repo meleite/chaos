@@ -38,7 +38,7 @@ namespace Chaos.Pages
         private IConfiguration configuration { get; set; }//then you can get your connectionStringvar connection=  configuration["connectionString"];
 
         //CheckBox
-        IEnumerable<int> Values = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        IEnumerable<int> Values = new int[] {1,2,3,4};
 
         //Search
         public string searchText { get; set; }
@@ -48,16 +48,14 @@ namespace Chaos.Pages
         public string test;
 
         private BlobClient blobClient;
+        private BlobClient blobClientPref;
 
         public LinkedList<SearchItem> items = new();
-       
+
         bool allowVirtualization = true;
 
         protected async override Task OnInitializedAsync()
         {
-            //OnInitialize          
-            Console.WriteLine(Security.User.Email);
-
             BlobServiceClient blobServiceClient = new BlobServiceClient(configuration["SASKey"]);
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(configuration["BlobName"]);
             blobClient = containerClient.GetBlobClient(Security.User.Email.Replace("@", "_") + ".json");
@@ -68,9 +66,9 @@ namespace Chaos.Pages
                 using (StreamReader r = new StreamReader(response.Value.Content))
                 {
                     string json = r.ReadToEnd();
-                    items = Newtonsoft.Json.JsonConvert.DeserializeObject<LinkedList<SearchItem>>(json);
+                    items = JsonConvert.DeserializeObject<LinkedList<SearchItem>>(json);
                 }
-            }
+            }            
         }
 
         private async Task SearchButton()

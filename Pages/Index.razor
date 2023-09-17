@@ -8,4 +8,24 @@
         <RadzenText Text="Crawler - Hybrid Amplifying OmniSearch" TextStyle="Radzen.Blazor.TextStyle.DisplayH2" TagName="Radzen.Blazor.TagName.Auto"></RadzenText>
     </RadzenColumn>
 </RadzenRow>
+<h4></h4>
 
+<div class="row">
+    <div class="col-sm-12 my-5">
+        <h4>Monthly Searchs</h4>
+        <RadzenChart>
+            <RadzenColumnSeries Data="@searchs" CategoryProperty="Date" Title="Date" LineType="LineType.Solid" ValueProperty="search">
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenColumnSeries>
+            <RadzenColumnOptions Radius="1" />
+            <RadzenValueAxis>
+                <RadzenGridLines Visible="true" />
+                <RadzenAxisTitle Text="Number of Searchs" />
+            </RadzenValueAxis>
+        </RadzenChart>
+        <RadzenCard class="w-100 mb-4">
+            <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+            <RadzenLabel Text="Show Data Labels" For="dataLabels" Style="margin-left: 8px; vertical-align: middle;" />
+        </RadzenCard>
+    </div>
+</div>
