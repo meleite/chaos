@@ -13,7 +13,7 @@
     </RadzenColumn>
 </RadzenRow>
 <RadzenTextBox Placeholder="Search..." @bind-Value=searchText Style="width: 80%"></RadzenTextBox>
-<RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" Style="height: 40px; background-color: #4340D2; color: #ffffff" />
+<RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" Style="height: 40px; background-color: #598087; color: #ffffff" />
 <RadzenButton Style="width: 100px; height: 40px" Text="Search" Click="@SearchButton"></RadzenButton>
 
 
@@ -45,7 +45,7 @@
                     <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-color-secondary">@(items.SearchText)</RadzenText>
                     </RadzenColumn>
                     <RadzenColumn Size="1" SizeLG="1" Class="rz-p-4">
-                        <RadzenButton Text="Search" Style="width: 100%" />
+                        <RadzenButton Text="Search" Style="width: 100%"/>
                     </RadzenColumn>
                     <RadzenColumn Size="1" SizeLG="1" Class="rz-p-4">
                         <RadzenButton Text="Edit" Style="width: 100%" />
