@@ -17,7 +17,7 @@
 <RadzenButton Style="width: 100px; height: 40px" Text="Search" Click="@SearchButton"></RadzenButton>
 
 
-<RadzenCheckBoxList @bind-Value=@Values TValue="int" Change=@(args => Values = args)>
+<RadzenCheckBoxList @bind-Value=@Values TValue="int" Change=@(args => Values = args) Style="margin-bottom: 50px">
     <Items>
         <RadzenCheckBoxListItem Value="1" Text="ICM"></RadzenCheckBoxListItem>
         <RadzenCheckBoxListItem Value="2" Text="Azure DevOps Work Items"></RadzenCheckBoxListItem>
