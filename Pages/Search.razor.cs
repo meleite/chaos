@@ -120,7 +120,7 @@ namespace Chaos.Pages
                 {
                     if (Values.Contains(1))//ICM
                     {
-                        await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText), "_blank");
+                        await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText) + " s:\"app service\"", "_blank");
                     }
                     if (Values.Contains(2))//DevOps Work Items
                     {
