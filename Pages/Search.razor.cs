@@ -86,7 +86,7 @@ namespace Chaos.Pages
                 }
                 if (Values.Contains(2))//DevOps Work Items
                 {
-                    await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=workitem&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    await JSRuntime.InvokeVoidAsync("open", "https://msazure.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=workitem&lp=custom-Collection&filters=&pageSize=25", "_blank");
                 }
                 if (Values.Contains(3))//DevOps Wiki
                 {
