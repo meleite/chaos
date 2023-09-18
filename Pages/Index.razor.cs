@@ -62,19 +62,21 @@ namespace Chaos.Pages
                     string json = r.ReadToEnd();
                     items = JsonConvert.DeserializeObject<LinkedList<SearchItem>>(json);
                 }
+
+                foreach (var item in items)
+                {
+                    var x = data.FirstOrDefault(x => x.Date == item.SearchDateTime);
+                    if (x != null)
+                        data.First(x => x.Date == item.SearchDateTime).search++;
+                    else
+                        data.Add(new DataItem() { Date = item.SearchDateTime, search = 1 });
+
+
+                }
+                searchs = data.ToArray();
             }
 
-            foreach(var item in items)
-            {
-                var x = data.FirstOrDefault(x => x.Date == item.SearchDateTime);
-                if(x != null)
-                    data.First(x => x.Date == item.SearchDateTime).search++;
-                else
-                    data.Add(new DataItem() { Date = item.SearchDateTime, search = 1 });
-                
-                
-            }
-            searchs = data.ToArray();
+            
         }
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
