@@ -148,23 +148,25 @@ namespace Chaos.Pages
                     }
                 }
 
-                
-            }
 
-            items.AddFirst(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow) });
-            var itemsJson = JsonConvert.SerializeObject(items);
+                items.AddFirst(new SearchItem() { SearchText = searchText, SearchDateTime = DateOnly.FromDateTime(DateTime.UtcNow) });
+                var itemsJson = JsonConvert.SerializeObject(items);
 
-            try
-            {
-                using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(itemsJson)))
+                try
                 {
-                    blobClient.Upload(ms, overwrite: true);
+                    using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(itemsJson)))
+                    {
+                        blobClient.Upload(ms, overwrite: true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception details: " + ex.ToString());
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception details: " + ex.ToString());
-            }
+
+
+          
         }
 
         void OnSpeechCaptured(string speechValue, bool updateTextArea, string name)
@@ -184,9 +186,16 @@ namespace Chaos.Pages
             DialogService.Open<PopUpWarning>("PopUp Requirements", null, new DialogOptions() { Width = "1000px", Height = "600px", Resizable = true, Draggable = true });
         }
 
-        private void HistorySearch()
+        private async void HistorySearch(string value)
         {
-            
+            searchText = value;
+            await @SearchButton();
+        }
+
+        private void EditSearch(string value)
+        {
+            searchText = value;
+          
         }
     }
 }

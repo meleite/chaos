@@ -46,10 +46,10 @@
                     <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-color-secondary">@(items.SearchText)</RadzenText>
                     </RadzenColumn>
                     <RadzenColumn Size="1" SizeLG="1" Class="rz-p-4">
-                        <RadzenButton Text="Search" Style="width: 100%" Click="@HistorySearch"/>
+                            <RadzenButton Text="Search" Style="width: 100%" Click=@(args => HistorySearch(items.SearchText)) />
                     </RadzenColumn>
                     <RadzenColumn Size="1" SizeLG="1" Class="rz-p-4">
-                        <RadzenButton Text="Edit" Style="width: 100%" />
+                            <RadzenButton Text="Edit" Style="width: 100%" Click=@(args => EditSearch(items.SearchText)) />
                     </RadzenColumn>
                 </RadzenRow>
             </RadzenCard>
