@@ -30,9 +30,9 @@
 </RadzenCheckBoxList>
 
 <RadzenCard>
-<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem" Class="rz-p-2">
-        <RadzenCheckBox @bind-Value="@allowVirtualization" Name="allowVirtualization"/>
-    <RadzenLabel Text="Allow Pagination" Component="allowVirtualization" />
+<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.End" Gap="0.5rem" Class="rz-p-2" >
+        <RadzenCheckBox @bind-Value="@allowVirtualization" Name="allowVirtualization" Style="margin-left: auto; margin-right: 0" />
+        <RadzenLabel Text="Allow Pagination" Component="allowVirtualization" Style="margin-left: 0; margin-right: 0" />
 </RadzenStack>
 
 <RadzenDataList AllowVirtualization=@allowVirtualization Style="@(allowVirtualization ? "height:800px;overflow:auto;" : "")"
