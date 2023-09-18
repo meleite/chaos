@@ -15,6 +15,7 @@
 <RadzenTextBox Placeholder="Search..." @bind-Value=searchText Style="width: 80%"></RadzenTextBox>
 <RadzenSpeechToTextButton Change="@(args => OnSpeechCaptured(args, true, "SpeechtoToSearch"))" Style="height: 40px; background-color: #598087; color: #ffffff" />
 <RadzenButton Style="width: 100px; height: 40px" Text="Search" Click="@SearchButton"></RadzenButton>
+<RadzenDropDown @bind-Value=@DropDownValue Data=@DropDownTeams Style="width: 110px; height: 40px" />
 
 
 <RadzenCheckBoxList @bind-Value=@Values TValue="int" Change=@(args => Values = args) Style="margin-bottom: 50px">
@@ -45,7 +46,7 @@
                     <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-color-secondary">@(items.SearchText)</RadzenText>
                     </RadzenColumn>
                     <RadzenColumn Size="1" SizeLG="1" Class="rz-p-4">
-                        <RadzenButton Text="Search" Style="width: 100%"/>
+                        <RadzenButton Text="Search" Style="width: 100%" Click="@HistorySearch"/>
                     </RadzenColumn>
                     <RadzenColumn Size="1" SizeLG="1" Class="rz-p-4">
                         <RadzenButton Text="Edit" Style="width: 100%" />

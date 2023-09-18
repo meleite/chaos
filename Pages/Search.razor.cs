@@ -54,6 +54,9 @@ namespace Chaos.Pages
 
         bool allowVirtualization = true;
 
+        public string DropDownValue;
+        IEnumerable<string> DropDownTeams;
+
         protected async override Task OnInitializedAsync()
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient(configuration["SASKey"]);
@@ -68,7 +71,10 @@ namespace Chaos.Pages
                     string json = r.ReadToEnd();
                     items = JsonConvert.DeserializeObject<LinkedList<SearchItem>>(json);
                 }
-            }            
+            }
+
+            DropDownValue = "All";
+            DropDownTeams = (IEnumerable<string>)new[] {"All", "AppServices"};
         }
 
         private async Task SearchButton()
@@ -79,35 +85,70 @@ namespace Chaos.Pages
             }
             else
             {
+                if (DropDownValue == "All")
+                {
+                    if (Values.Contains(1))//ICM
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText), "_blank");
+                    }
+                    if (Values.Contains(2))//DevOps Work Items
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://msazure.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=workitem&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    }
+                    if (Values.Contains(3))//DevOps Wiki
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=wiki&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    }
+                    if (Values.Contains(4))//DevOps Code
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?&text=" + HttpUtility.UrlEncode(searchText) + "&type=code&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    }
+                    if (Values.Contains(5))//DFM
+                    {
 
-                if (Values.Contains(1))//ICM
-                {
-                    await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText), "_blank");
-                }
-                if (Values.Contains(2))//DevOps Work Items
-                {
-                    await JSRuntime.InvokeVoidAsync("open", "https://msazure.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=workitem&lp=custom-Collection&filters=&pageSize=25", "_blank");
-                }
-                if (Values.Contains(3))//DevOps Wiki
-                {
-                    await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=wiki&lp=custom-Collection&filters=&pageSize=25", "_blank");
-                }
-                if (Values.Contains(4))//DevOps Code
-                {
-                    await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/_search?&text=" + HttpUtility.UrlEncode(searchText) + "&type=code&lp=custom-Collection&filters=&pageSize=25", "_blank");
-                }
-                if (Values.Contains(5))//DFM
-                {
+                    }
+                    if (Values.Contains(6))//AVA
+                    {
 
-                }
-                if (Values.Contains(6))//AVA
-                {
+                    }
+                    if (Values.Contains(7))//OUTLOOK
+                    {
 
+                    }
                 }
-                if (Values.Contains(7))//OUTLOOK
+                else if (DropDownValue == "AppServices")
                 {
+                    if (Values.Contains(1))//ICM
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://icmcdn.akamaized.net/imp/v3/incidents/omnisearch?searchString=" + HttpUtility.UrlEncode(searchText), "_blank");
+                    }
+                    if (Values.Contains(2))//DevOps Work Items
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://msazure.visualstudio.com/Antares/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=workitem&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    }
+                    if (Values.Contains(3))//DevOps Wiki
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/AzureAppService/_search?action=contents&text=" + HttpUtility.UrlEncode(searchText) + "&type=wiki&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    }
+                    if (Values.Contains(4))//DevOps Code
+                    {
+                        await JSRuntime.InvokeVoidAsync("open", "https://supportability.visualstudio.com/AzureAppService/_search?&text=" + HttpUtility.UrlEncode(searchText) + "&type=code&lp=custom-Collection&filters=&pageSize=25", "_blank");
+                    }
+                    if (Values.Contains(5))//DFM
+                    {
 
+                    }
+                    if (Values.Contains(6))//AVA
+                    {
+
+                    }
+                    if (Values.Contains(7))//OUTLOOK
+                    {
+
+                    }
                 }
+
+                
             }
 
             items.AddFirst(new SearchItem() { SearchText=searchText, SearchDateTime= DateOnly.FromDateTime(DateTime.UtcNow) });
@@ -141,6 +182,11 @@ namespace Chaos.Pages
         private void PopupWarning()
         {
             DialogService.Open<PopUpWarning>("PopUp Requirements", null, new DialogOptions() { Width = "1000px", Height = "600px", Resizable = true, Draggable = true });
+        }
+
+        private void HistorySearch()
+        {
+            
         }
     }
 }
